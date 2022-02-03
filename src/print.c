@@ -1,5 +1,6 @@
 #include "fdf.h"
 
+//Prints the input array : 'vector_array'
 void	print_test(t_array array)
 {
 	size_t	i;

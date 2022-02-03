@@ -9,8 +9,10 @@ SRCS :=	gnl/get_next_line.c \
 			gnl/get_next_line_utils.c \
 			src/main.c \
 			src/array_size.c \
-			src/input.c \
-			src/print.c 
+			src/make_input_array.c \
+			src/print.c  \
+			src/rotate.c \
+			src/make_square.c
 			#hier komt nog meer
 
 HEADERFILES := fdf.h
