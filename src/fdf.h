@@ -14,6 +14,9 @@
 //# define D_COLOR 16711680 //red
 # define D_COLOR 65280 //green
 # define _USE_MATH_DEFINES // for C
+# define X_MUL 1
+# define Y_MUL 1
+# define Z_MUL 1
 # include <math.h>
 
 typedef struct s_data
@@ -31,6 +34,21 @@ typedef struct s_vector
 	float	y;
 	float	z;
 }	t_vector;
+
+typedef struct s_output
+{
+	int	x;
+	int	y;
+}	t_output;
+
+typedef struct s_plot
+{
+	int	dx;
+	int	dy;
+	int	x_increment;
+	int	y_increment;
+	int	D;
+}	t_plot;
 
 typedef struct s_array
 {
@@ -59,10 +77,13 @@ typedef struct s_rotation
 size_t		get_array_length(char **argv, t_array *pixel);
 char		*remove_newline(char *line);
 t_vector	*make_input_array(char **argv, size_t array_size);
-void		print_test(t_array array);
+void		print_test(t_array array, t_output *output); // for the output array
+// void		print_test(t_array array);
 void		determine_line_lenght(t_array *length);
-void		make_first_square(t_data *img, t_array array);
-void		rotate_z_axis(int x, int y, int z, t_data *img);
-void		rotate_x_axis(int x, int y, int z, t_data *img);
-void		rotate_y_axis(int x, int y, int z, t_data *img);
+t_output	*make_first_square(t_array array);
+void		rotate_z_axis(int x, int y, int z, t_output *output);
+void		rotate_x_axis(int x, int y, int z, t_output *output);
+void		rotate_y_axis(int x, int y, int z, t_output *output);
+void		my_mlx_pixel_put(t_data *data, int x, int y, int color);
+void		call_plot_function(t_output *output, t_array array, t_data *img);
 #endif

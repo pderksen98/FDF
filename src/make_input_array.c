@@ -13,9 +13,9 @@ static t_vector	*fill_array2(char **line_2d, \
 	x = 0;
 	while (x < total_x)
 	{
-		vector.x = (float)x;
-		vector.y = (float)y;
-		vector.z = (float)ft_atoi(line_2d[x]);
+		vector.x = (float)x * X_MUL;
+		vector.y = (float)y * Y_MUL;
+		vector.z = (float)ft_atoi(line_2d[x]) * Z_MUL;
 		vector_array[array_start + x] = vector;
 		x++;
 	}
