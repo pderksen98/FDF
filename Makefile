@@ -1,6 +1,12 @@
 # -*- Makefile -*-
 NAME := fdf
 
+# ifndef DEBUG
+# CFLAGS := -Wall -Wextra -Werror
+# else
+# CFLAGS := -Wall -Wextra -Werror -fsanitize=address -g
+# endif
+
 CFLAGS := -Wall -Wextra -Werror
 
 CC := gcc
@@ -12,7 +18,10 @@ SRCS :=	gnl/get_next_line.c \
 			src/make_input_array.c \
 			src/print.c  \
 			src/rotate.c \
-			src/make_square.c
+			src/make_square.c \
+			src/plot.c \
+			src/events.c \
+			src/increase_z.c
 			#hier komt nog meer
 
 HEADERFILES := fdf.h

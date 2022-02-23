@@ -28,7 +28,7 @@ void	plot_line_high(t_data *img, int x0, int y0, int x1, int y1)
 	plot.D = (2 * plot.dx) - plot.dy;
 	while (y0 <= y1)
 	{
-		my_mlx_pixel_put(img, x0, y0, D_COLOR);
+		my_mlx_pixel_put(img, x0, y0, GREEN_COLOR);
 		if (plot.D > 0)
 		{
 			x0 = x0 + plot.x_increment;
@@ -56,7 +56,7 @@ void	plot_line_low(t_data *img, int x0, int y0, int x1, int y1)
 	plot.D = (2 * plot.dy) - plot.dx;
 	while (x0 <= x1)
 	{
-		my_mlx_pixel_put(img, x0, y0, D_COLOR);
+		my_mlx_pixel_put(img, x0, y0, GREEN_COLOR);
 		if (plot.D > 0)
 		{
 			y0 = y0 + plot.y_increment;

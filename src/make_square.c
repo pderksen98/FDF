@@ -1,5 +1,6 @@
 #include "fdf.h"
 
+
 //Determines the number of pixels (x_dis & y_dis) between the x & y points
 //Depends on S_WIDTH, S_HEIGHT and on the max length between x & y points
 void	determine_line_lenght(t_array *length)
@@ -14,11 +15,16 @@ void	determine_line_lenght(t_array *length)
 	x_dis = R_WIDTH / length->x_pixels;
 	while (x_dis < max_len_x && max_len_x > 1)
 		max_len_x--;
-	length->x_dis = max_len_x - 1;
+	
 	y_dis = R_HEIGHT / length->y_pixels;
 	while (y_dis < max_len_y && max_len_y > 1)
 		max_len_y--;
+	if (max_len_x > max_len_y)
+		max_len_x = max_len_y;
+	if (max_len_y > max_len_x)
+		max_len_y = max_len_x;
 	length->y_dis = max_len_y - 1;
+	length->x_dis = max_len_x - 1;
 }
 
 //Fills and returns the output array by calling the 'rotate' function for each set of x,y,z coordinates
