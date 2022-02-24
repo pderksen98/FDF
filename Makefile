@@ -16,12 +16,12 @@ SRCS :=	gnl/get_next_line.c \
 			src/main.c \
 			src/array_size.c \
 			src/make_input_array.c \
-			src/print.c  \
 			src/rotate.c \
 			src/make_square.c \
 			src/plot.c \
 			src/events.c \
-			src/increase_z.c
+			src/increase_z.c \
+			src/add_angle.c
 			#hier komt nog meer
 
 HEADERFILES := fdf.h

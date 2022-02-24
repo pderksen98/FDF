@@ -19,12 +19,23 @@
 # define BLACK_COLOR 0
 # define _USE_MATH_DEFINES // for C
 
-
 typedef enum e_keys {
 	ESC = 53,
 	RED_CROSS = 17,
 	Z = 6,
 	X = 7,
+	LEFT = 123,
+	RIGHT = 124,
+	DOWN = 126,
+	UP = 125,
+	Q = 12,
+	W = 13,
+	E = 14,
+	R = 15,
+	T = 17,
+	Y = 16,
+	SCROLL_UP = 5,
+	SCROLL_DOWN = 4
 }			t_keys;
 
 typedef struct s_data
@@ -34,6 +45,7 @@ typedef struct s_data
 	int		bits_per_pixel;
 	int		line_length;
 	int		endian;
+	int		x0;
 }	t_data;
 
 typedef struct s_vector
@@ -58,23 +70,23 @@ typedef struct s_plot
 	int	D;
 }	t_plot;
 
-typedef struct s_array
-{
-	t_vector	*input;
-	size_t		input_len;
-	int			x_dis;
-	int			y_dis;
-	int			x_pixels;
-	int			y_pixels;
-}	t_array;
-
 typedef struct s_vars
 {
 	void		*mlx;
 	void		*win;
 	t_data		img;
-	t_array		array;
+	size_t		input_len;
+	int			x_dis;
+	int			y_dis;
+	int			x_pixels;
+	int			y_pixels;
+	t_vector	*input;
 	float		z_mul;
+	float		x_angle;
+	float		y_angle;
+	float		z_angle;
+	size_t		x_shift;
+	size_t		y_shift;
 }	t_vars;
 
 typedef struct s_rotation
@@ -91,21 +103,22 @@ typedef struct s_rotation
 	float	angle;
 }	t_rotation;
 
-size_t		get_array_length(char **argv, t_array *pixel);
+size_t		get_array_length(char **argv, t_vars *pixel);
 char		*remove_newline(char *line);
 t_vector	*make_input_array(char **argv, size_t array_size);
-// void		print_test(t_array array, t_output *output); // for the output array
-void		print_test(t_array array);
-void		determine_line_lenght(t_array *length);
-t_output	*make_first_square(t_array array);
-void		rotate_z_axis(int x, int y, int z, t_output *output);
-void		rotate_x_axis(int x, int y, int z, t_output *output);
-void		rotate_y_axis(int x, int y, int z, t_output *output);
+void		determine_line_lenght(t_vars *length);
+t_output	*make_first_square(t_vars vars);
+void		rotate_z_axis(int x, int y, int z, t_output *output, t_vars vars);
+void		rotate_x_axis(int x, int y, int z, t_output *output, t_vars vars);
+void		rotate_y_axis(int x, int y, int z, t_output *output, t_vars vars);
 void		my_mlx_pixel_put(t_data *data, int x, int y, int color);
-void		call_plot_function(t_output *output, t_array array, t_data *img);
+void		call_plot_function(t_output *output, t_vars vars, t_data *img);
 int			render_next_frame(t_vars *vars);
 int			close_screen(int keycode, t_vars *vars);
-void    	make_screen_black(t_vars *vars);
-int 		increase_z(int keycode, t_vars *vars);
-void		make_output(t_array array, t_vars vars);
+void		make_screen_black(t_vars *vars);
+int			increase_z(int keycode, t_vars *vars);
+void		make_output(t_vars vars);
+int			add_angle(int keycode, t_vars *vars);
+int			x_and_y_shift(int keycode, t_vars *vars);
+int			zoom(int keycode, t_vars *vars);
 #endif

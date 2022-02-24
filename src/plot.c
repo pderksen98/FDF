@@ -5,7 +5,7 @@ void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 {
 	char	*dst;
 
-	if ((x >= 0 && x <= S_WIDTH) && (y >= 0 && y <= S_HEIGHT))
+	if ((x >= 0 && x < S_WIDTH) && (y >= 0 && y < S_HEIGHT))
 	{
 		 dst = data->addr + (y * data->line_length + x * (data->bits_per_pixel / 8));
 		*(unsigned int *)dst = color;
@@ -91,25 +91,23 @@ void	plot_line(t_data *img, int x0, int y0, int x1, int y1)
 
 //Goes through the output array and determines wich coordinates need to be connected
 //Calls the plot line function with correct pixels/coordinates
-void	call_plot_function(t_output *output, t_array array, t_data *img)
+void	call_plot_function(t_output *output, t_vars vars, t_data *img)
 {
 	size_t	i;
-	size_t	row;
 	size_t	end;
 
-	end = array.x_pixels - 1;
+	end = vars.x_pixels - 1;
 	i = 0;
-	row = 1;
-	while (i < (array.input_len - 1))
+	while (i < (vars.input_len - 1))
 	{
-		if (i < (array.input_len - array.x_pixels))
+		if (i < (vars.input_len - vars.x_pixels))
 		{
-			plot_line(img, output[i].x, output[i].y, output[i + array.x_pixels].x, output[i + array.x_pixels].y);
+			plot_line(img, output[i].x, output[i].y, output[i + vars.x_pixels].x, output[i + vars.x_pixels].y);
 			if (i != end)
 				plot_line(img, output[i].x, output[i].y, output[i + 1].x, output[i + 1].y);
 		}
 		if (i == end)
-			end = end + array.x_pixels;
+			end = end + vars.x_pixels;
 		else
 			plot_line(img, output[i].x, output[i].y, output[i + 1].x, output[i + 1].y);
 		i++;

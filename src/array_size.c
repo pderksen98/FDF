@@ -42,7 +42,7 @@ char	*remove_newline(char *line)
 
 //Opens the map to file descriptor (fd)
 //Returns the total number of input values (x * y)
-size_t	get_array_length(char **argv, t_array *pixel)
+size_t	get_array_length(char **argv, t_vars *pixel)
 {
 	int		fd;
 	char	*line;
