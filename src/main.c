@@ -26,6 +26,7 @@ int	main(int argc, char **argv)
 	vars.z_mul = 1;
 	vars.x_shift = 0;
 	vars.y_shift = 0;
+	vars.length_mod = 0;
 	make_output(vars);
 	render_next_frame(&vars);
 	mlx_loop(vars.mlx);

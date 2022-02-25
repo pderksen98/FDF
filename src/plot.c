@@ -7,18 +7,19 @@ void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 
 	if ((x >= 0 && x < S_WIDTH) && (y >= 0 && y < S_HEIGHT))
 	{
-		 dst = data->addr + (y * data->line_length + x * (data->bits_per_pixel / 8));
+		 dst = data->addr + (y * data->line_length + \
+		 	 x * (data->bits_per_pixel / 8));
 		*(unsigned int *)dst = color;
 	}
 }
 
 //For lines with: slope < -1 and slope > 1
-void	plot_line_high(t_data *img, int x0, int y0, int x1, int y1)
+void	plot_line_high(t_data *img, t_output p, t_output p1)
 {
 	t_plot	plot;
 
-	plot.dx = x1 - x0;
-	plot.dy = y1 - y0;
+	plot.dx = p1.x - p.x;
+	plot.dy = p1.y - p.y;
 	plot.x_increment = 1;
 	if (plot.dx < 0)
 	{
@@ -26,27 +27,27 @@ void	plot_line_high(t_data *img, int x0, int y0, int x1, int y1)
 		plot.dx = -plot.dx;
 	}
 	plot.D = (2 * plot.dx) - plot.dy;
-	while (y0 <= y1)
+	while (p.y <= p1.y)
 	{
-		my_mlx_pixel_put(img, x0, y0, GREEN_COLOR);
+		my_mlx_pixel_put(img, p.x, p.y, GREEN_COLOR);
 		if (plot.D > 0)
 		{
-			x0 = x0 + plot.x_increment;
+			p.x = p.x + plot.x_increment;
 			plot.D = plot.D + (2 * (plot.dx - plot.dy));
 		}
 		else
 			plot.D = plot.D + (2 * plot.dx);
-		y0++;
+		p.y++;
 	}
 }
 
 //For lines with: -1 > slope < 1; 
-void	plot_line_low(t_data *img, int x0, int y0, int x1, int y1)
+void	plot_line_low(t_data *img, t_output p, t_output p1)
 {
 	t_plot	plot;
 
-	plot.dx = x1 - x0;
-	plot.dy = y1 - y0;
+	plot.dx = p1.x - p.x;
+	plot.dy = p1.y - p.y;
 	plot.y_increment = 1;
 	if (plot.dy < 0)
 	{
@@ -54,42 +55,44 @@ void	plot_line_low(t_data *img, int x0, int y0, int x1, int y1)
 		plot.dy = -plot.dy;
 	}
 	plot.D = (2 * plot.dy) - plot.dx;
-	while (x0 <= x1)
+	while (p.x <= p1.x)
 	{
-		my_mlx_pixel_put(img, x0, y0, GREEN_COLOR);
+		my_mlx_pixel_put(img, p.x, p.y, GREEN_COLOR);
 		if (plot.D > 0)
 		{
-			y0 = y0 + plot.y_increment;
+			p.y = p.y + plot.y_increment;
 			plot.D = plot.D + (2 * (plot.dy - plot.dx));
 		}
 		else
 			plot.D = plot.D + (2 * plot.dy);
-		x0++;
+		p.x++;
 	}
 }
 
 //Plots line between point (x0, y0) and point (x1, y1)
 //Points get also drawn by pixel
-//Depending on the slope of the line, either plot_line_high or plot_line_low is called
-void	plot_line(t_data *img, int x0, int y0, int x1, int y1)
+//Depending on the slope of the line,... 
+//either plot_line_high or plot_line_low is called
+void	plot_line(t_data *img, t_output p, t_output p1)
 {
-	if (abs(y1 - y0) < abs(x1 - x0))
+	if (abs(p1.y - p.y) < abs(p1.x - p.x))
 	{
-		if (x1 > x0)
-			plot_line_low(img, x0, y0, x1, y1);
+		if (p1.x > p.x)
+			plot_line_low(img, p, p1);
 		else
-			plot_line_low(img, x1, y1, x0, y0);
+			plot_line_low(img, p1, p);
 	}
 	else
 	{
-		if (y1 > y0)
-			plot_line_high(img, x0, y0, x1, y1);
+		if (p1.y > p.y)
+			plot_line_high(img, p, p1);
 		else
-			plot_line_high(img, x1, y1, x0, y0);
+			plot_line_high(img, p1, p);
 	}
 }
 
-//Goes through the output array and determines wich coordinates need to be connected
+//Goes through the output array and determines wich...
+//coordinates need to be connected
 //Calls the plot line function with correct pixels/coordinates
 void	call_plot_function(t_output *output, t_vars vars, t_data *img)
 {
@@ -102,14 +105,14 @@ void	call_plot_function(t_output *output, t_vars vars, t_data *img)
 	{
 		if (i < (vars.input_len - vars.x_pixels))
 		{
-			plot_line(img, output[i].x, output[i].y, output[i + vars.x_pixels].x, output[i + vars.x_pixels].y);
+			plot_line(img, output[i], output[i + vars.x_pixels]);
 			if (i != end)
-				plot_line(img, output[i].x, output[i].y, output[i + 1].x, output[i + 1].y);
+				plot_line(img, output[i], output[i + 1]);
 		}
 		if (i == end)
 			end = end + vars.x_pixels;
 		else
-			plot_line(img, output[i].x, output[i].y, output[i + 1].x, output[i + 1].y);
+			plot_line(img, output[i], output[i + 1]);
 		i++;
 	}
 }

@@ -23,23 +23,24 @@ int	x_and_y_shift(int keycode, t_vars *vars)
 {
 	make_screen_black(vars);
 	if (keycode == LEFT)
-		vars->x_shift -= 20;
-	else if (keycode == RIGHT)
 		vars->x_shift += 20;
+	else if (keycode == RIGHT)
+		vars->x_shift -= 20;
 	else if (keycode == DOWN)
-		vars->y_shift -= 20;
-	else if (keycode == UP)
 		vars->y_shift += 20;
+	else if (keycode == UP)
+		vars->y_shift -= 20;
 	make_output(*vars);
 	return (0);
 }
 
 int	zoom(int keycode, t_vars *vars)
 {
-	(void)vars;
+	make_screen_black(vars);
 	if (keycode == SCROLL_DOWN)
-		printf("A");
+		vars->length_mod++;
 	else if (keycode == SCROLL_UP)
-		printf("A");
+		vars->length_mod--;
+	make_output(*vars);
 	return (0);
 }

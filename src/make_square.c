@@ -1,5 +1,20 @@
 #include "fdf.h"
 
+void	modify_line_length(t_vars *vars)
+{
+	float		old_line_length;
+	float		new_line_lenght;
+	float		ratio;
+
+	old_line_length = vars->line_length;
+	new_line_lenght = vars->line_length + vars->length_mod;
+	if (new_line_lenght < 1)
+		new_line_lenght = 1;
+	vars->line_length = new_line_lenght;
+	ratio = new_line_lenght / old_line_length;
+	vars->z_mod = ratio;
+}
+
 //Determines the number of pixels (x_dis & y_dis) between the x & y points
 //Depends on S_WIDTH, S_HEIGHT and on the max length between x & y points
 void	determine_line_lenght(t_vars *length)
@@ -19,10 +34,7 @@ void	determine_line_lenght(t_vars *length)
 		max_len_y--;
 	if (max_len_x > max_len_y)
 		max_len_x = max_len_y;
-	if (max_len_y > max_len_x)
-		max_len_y = max_len_x;
-	length->y_dis = max_len_y - 1;
-	length->x_dis = max_len_x - 1;
+	length->line_length = max_len_x;
 }
 
 //Fills and returns the output array by calling the 'rotate' function 
@@ -35,20 +47,23 @@ t_output	*make_first_square(t_vars vars)
 	int			y_start;
 	size_t		i;
 	t_output	*output;
+	t_point		point;
 
 	output = malloc(sizeof(t_output) * vars.input_len);
 	ft_check_malloc(output);
 	determine_line_lenght(&vars);
-	x_start = (S_WIDTH - ((vars.x_dis + 1) * vars.x_pixels * X_MUL)) / 2;
-	y_start = (S_HEIGHT - ((vars.y_dis + 1) * vars.y_pixels * Y_MUL)) / 2;
+	modify_line_length(&vars);
+	x_start = (S_WIDTH - ((vars.line_length) * vars.x_pixels * X_MUL)) / 2;
+	y_start = (S_HEIGHT - ((vars.line_length) * vars.y_pixels * Y_MUL)) / 2;
 	i = 0;
 	while (i < vars.input_len)
 	{	
-		rotate_z_axis(x_start + (int)vars.input[i].x + \
-			(int)vars.input[i].x * vars.x_dis, \
-			 y_start + (int)vars.input[i].y + \
-			 (int)vars.input[i].y * vars.y_dis, \
-			 (int)vars.input[i].z * vars.z_mul, &output[i], vars);
+		point.x = x_start + (int)vars.input[i].x + \
+			(int)vars.input[i].x * vars.line_length;
+		point.y = y_start + (int)vars.input[i].y + \
+			(int)vars.input[i].y * vars.line_length;
+		point.z = (int)vars.input[i].z * vars.z_mul * vars.z_mod;
+		rotate_z_axis(point, &output[i], vars);
 		i++;
 	}
 	return (output);

@@ -6,7 +6,7 @@ static int	mouse_hook(int keycode, int x, int y, t_vars *vars)
 	(void)y;
 	(void)vars;
 	if (keycode == SCROLL_UP || keycode == SCROLL_DOWN)
-		printf("TJAKKA!\n");
+		zoom(keycode, vars);
 	return (0);
 }
 

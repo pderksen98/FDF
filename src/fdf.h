@@ -11,10 +11,10 @@
 # define X_MUL 1
 # define Y_MUL 1
 # define Z_MUL 1
-# define S_WIDTH 2000
-# define S_HEIGHT 1250
-# define R_WIDTH 1400 //(S_WIDTH * 0.7)
-# define R_HEIGHT 875 //(S_HEIGHT * 0.7)
+# define S_WIDTH 2300
+# define S_HEIGHT 1300
+# define R_WIDTH 1000 //(S_WIDTH * 0.7)
+# define R_HEIGHT 650 //(S_HEIGHT * 0.7)
 # define GREEN_COLOR 65280
 # define BLACK_COLOR 0
 # define _USE_MATH_DEFINES // for C
@@ -76,8 +76,7 @@ typedef struct s_vars
 	void		*win;
 	t_data		img;
 	size_t		input_len;
-	int			x_dis;
-	int			y_dis;
+	int			line_length;
 	int			x_pixels;
 	int			y_pixels;
 	t_vector	*input;
@@ -87,6 +86,8 @@ typedef struct s_vars
 	float		z_angle;
 	size_t		x_shift;
 	size_t		y_shift;
+	int			length_mod;
+	float		z_mod;
 }	t_vars;
 
 typedef struct s_rotation
@@ -95,6 +96,7 @@ typedef struct s_rotation
 	float	y_origen;
 	int		x_0;
 	int		y_0;
+	int		z_0;
 	int		x_1;
 	int		y_1;
 	int		z_1;
@@ -103,14 +105,21 @@ typedef struct s_rotation
 	float	angle;
 }	t_rotation;
 
+typedef struct s_point
+{
+	int	x;
+	int	y;
+	int	z;
+}	t_point;
+
 size_t		get_array_length(char **argv, t_vars *pixel);
 char		*remove_newline(char *line);
 t_vector	*make_input_array(char **argv, size_t array_size);
 void		determine_line_lenght(t_vars *length);
 t_output	*make_first_square(t_vars vars);
-void		rotate_z_axis(int x, int y, int z, t_output *output, t_vars vars);
-void		rotate_x_axis(int x, int y, int z, t_output *output, t_vars vars);
-void		rotate_y_axis(int x, int y, int z, t_output *output, t_vars vars);
+void		rotate_z_axis(t_point point, t_output *output, t_vars vars);
+void		rotate_x_axis(t_rotation rot, t_output *output, t_vars vars);
+void		rotate_y_axis(t_rotation rot, t_output *output, t_vars vars);
 void		my_mlx_pixel_put(t_data *data, int x, int y, int color);
 void		call_plot_function(t_output *output, t_vars vars, t_data *img);
 int			render_next_frame(t_vars *vars);
