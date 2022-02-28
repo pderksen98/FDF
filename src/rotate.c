@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        ::::::::            */
+/*   rotate.c                                           :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: pderksen <pderksen@student.codam.nl>         +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2022/02/28 11:52:39 by pderksen      #+#    #+#                 */
+/*   Updated: 2022/02/28 11:52:40 by pderksen      ########   odam.nl         */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "fdf.h"
 
 //Rotates the square with angle (in radians) around y-axis w.r.t origen

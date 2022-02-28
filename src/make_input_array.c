@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        ::::::::            */
+/*   make_input_array.c                                 :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: pderksen <pderksen@student.codam.nl>         +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2022/02/28 11:52:53 by pderksen      #+#    #+#                 */
+/*   Updated: 2022/02/28 11:52:54 by pderksen      ########   odam.nl         */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "fdf.h"
 
 //Recieves the 'line_2d' array with z-values and corresponding y-value

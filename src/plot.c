@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        ::::::::            */
+/*   plot.c                                             :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: pderksen <pderksen@student.codam.nl>         +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2022/02/28 11:52:45 by pderksen      #+#    #+#                 */
+/*   Updated: 2022/02/28 11:56:02 by pderksen      ########   odam.nl         */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "fdf.h"
 
-//Puts pixel in input color to the window on place x, y
+//Puts pixel in input 'color' to the window on place x, y
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 {
 	char	*dst;

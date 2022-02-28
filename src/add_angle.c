@@ -1,5 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        ::::::::            */
+/*   add_angle.c                                        :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: pderksen <pderksen@student.codam.nl>         +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2022/02/28 12:18:04 by pderksen      #+#    #+#                 */
+/*   Updated: 2022/02/28 12:26:03 by pderksen      ########   odam.nl         */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "fdf.h"
 
+//-Q and -W rotate points around the x-axis
+//-E and -R rotate points around the y-axis
+//-T and -Y rotate points around the z-axis
 int	add_angle(int keycode, t_vars *vars)
 {
 	make_screen_black(vars);
@@ -19,6 +34,8 @@ int	add_angle(int keycode, t_vars *vars)
 	return (0);
 }
 
+//LEFT and RIGHT arrows shift the screen in L,R dir
+//UP and DOWN arrows shift the screen in U,D dir
 int	x_and_y_shift(int keycode, t_vars *vars)
 {
 	make_screen_black(vars);
@@ -34,6 +51,8 @@ int	x_and_y_shift(int keycode, t_vars *vars)
 	return (0);
 }
 
+//When mouse scrolls down, zoom out
+//When mouse scrools up, zoom in 
 int	zoom(int keycode, t_vars *vars)
 {
 	make_screen_black(vars);

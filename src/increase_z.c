@@ -1,5 +1,19 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        ::::::::            */
+/*   increase_z.c                                       :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: pderksen <pderksen@student.codam.nl>         +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2022/02/28 11:53:15 by pderksen      #+#    #+#                 */
+/*   Updated: 2022/02/28 12:17:43 by pderksen      ########   odam.nl         */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "fdf.h"
 
+//Makes the entire screen black again by making each..
+//pixel black
 void	make_screen_black(t_vars *vars)
 {
 	size_t	i;
@@ -18,6 +32,9 @@ void	make_screen_black(t_vars *vars)
 	}
 }
 
+//Function in order to increase the z-value
+//With X the value decreases by multiplying with 0.9
+//With Z the value increases by multiplying with 1.1
 int	increase_z(int keycode, t_vars *vars)
 {
 	make_screen_black(vars);

@@ -1,5 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        ::::::::            */
+/*   make_square.c                                      :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: pderksen <pderksen@student.codam.nl>         +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2022/02/28 11:52:49 by pderksen      #+#    #+#                 */
+/*   Updated: 2022/02/28 12:15:48 by pderksen      ########   odam.nl         */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "fdf.h"
 
+//When zoom function is called the z has to increase also
+//Determines multiplication factor for z-value in order..
+//to keep the correct ratio relative to x and y value
 void	modify_line_length(t_vars *vars)
 {
 	float		old_line_length;
@@ -15,7 +30,8 @@ void	modify_line_length(t_vars *vars)
 	vars->z_mod = ratio;
 }
 
-//Determines the number of pixels (x_dis & y_dis) between the x & y points
+//Determines the max number of pixels (max_len_xy)...
+//between the x & y points
 //Depends on S_WIDTH, S_HEIGHT and on the max length between x & y points
 void	determine_line_lenght(t_vars *length)
 {
@@ -37,10 +53,11 @@ void	determine_line_lenght(t_vars *length)
 	length->line_length = max_len_x;
 }
 
-//Fills and returns the output array by calling the 'rotate' function 
-//for each set of x,y,z coordinates
+//Determines lengt between points (line_lenght)..
+//by calling 'determine_line_length' function
 //Calculates start point for x & y in order to be centred
-//x and y coordinates with correct distance (x_dis & y_dis) between the pixels
+//Fills and returns the output array by calling the 'rotate' function..
+//for each set of x,y,z coordinates
 t_output	*make_first_square(t_vars vars)
 {
 	int			x_start;

@@ -1,5 +1,21 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        ::::::::            */
+/*   main.c                                             :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: pderksen <pderksen@student.codam.nl>         +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2022/02/28 11:52:56 by pderksen      #+#    #+#                 */
+/*   Updated: 2022/02/28 12:27:17 by pderksen      ########   odam.nl         */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "fdf.h"
 
+//Calculates output array by calling 'make_first_square' function
+//Makes the image by calling the call_plot_function
+//Puts image to window
+//Frees the output array
 void	make_output(t_vars vars)
 {
 	t_output	*output;
@@ -10,6 +26,11 @@ void	make_output(t_vars vars)
 	free (output);
 }
 
+//Input length and input array are made
+//Window and image are made
+//Calls 'make_output' function to create output array
+//Loops the function and calls 'render_next_frame'
+//Frees the input array
 int	main(int argc, char **argv)
 {
 	t_vars	vars;
