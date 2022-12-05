@@ -109,7 +109,4 @@ make re
 
 <img width="800" alt="Screen Shot 2022-02-25 at 11 10 01 AM" src="https://user-images.githubusercontent.com/89991397/155983160-ac292944-77ae-4ebd-8bca-97d797a8e2f7.png">
 
-**Feel free to try it out** :+1:  
-**HAVE FUN!** :call_me_hand: 
-
 
